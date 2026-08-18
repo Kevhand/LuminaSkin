@@ -1,0 +1,320 @@
+{% extends 'skin/base.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tour.css' %}">
+    <link rel="stylesheet" href="{% static 'css/scan-loading.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="dashboard_layout" id="dashboard-layout"
+    data-has-results="{{ skin_result|yesno:'true,false' }}"
+    data-total-scans="{{ summary.total_scans|default:0 }}"
+    data-user-id="{{ request.user.id }}">
+    <h1 class="section_title">
+        Dashboard
+        <button type="button" id="replay-tour-btn" class="tour_replay_btn" title="Show me around">? Tour</button>
+    </h1>
+    
+    <!-- TOP ROW: Scanner Area -->
+    <div class="dashboard_top_row">
+        
+        <!-- ================= LEFT COLUMN ================= -->
+        <aside class="dashboard_left">
+            <div class="card upload_card">
+                <h2 class="card_title">Upload Image for Skin Analysis</h2>
+            
+                <form method="POST" enctype="multipart/form-data" id="scan-form">
+                    {% csrf_token %}
+                    
+                    <!-- NEW DRAG AND DROP ZONE -->
+                    <div class="form_group">
+                        <label for="image">Image:</label>
+                        <div id="dropzone" class="dropzone_wrapper">
+                            <div class="dropzone_content">
+                                <span class="drop_icon">📸</span>
+                                <span class="drop_text">Drag & drop your image here</span>
+                                <span class="drop_subtext">or click to browse</span>
+                            </div>
+                            <!-- Invisible input covering the box -->
+                            <input type="file" id="image" name="image" accept="image/*" required>
+                        </div>
+                    </div>
+
+                    <div class="form_group concerns_wrapper" id="concern-select-area">
+                        <h3>Every Scan includes</h3>
+                        <div class="always_included">
+                            <div class="always_card">Skin Age</div>
+                            <div class="always_card">Texture</div>
+                            <div class="always_card">Skin Type</div>
+                        </div>
+
+                        <label>Select Skin Concerns</label>
+                        
+                        <!-- Scrollable Concerns Box -->
+                        <div class="concerns_scroll_area">
+                            <div class="concern_group">
+                                <h4>Eye Area</h4>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="dark_circle_v2">
+                                    <span>Dark Circles</span>
+                                </label>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="eye_bag">
+                                    <span>Eye Bag</span>
+                                </label>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="droopy_upper_eyelid">
+                                    <span>Droopy Upper Eyelid</span>
+                                </label>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="droopy_lower_eyelid">
+                                    <span>Droopy Lower Eyelid</span>
+                                </label>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="tear_trough">
+                                    <span>Tear Trough</span>
+                                </label>
+                            </div>
+
+                            <div class="concern_group">
+                                <h4>Skin Surface</h4>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="acne">
+                                    <span>Acne</span>
+                                </label>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="wrinkle">
+                                    <span>Wrinkles</span>
+                                </label>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="firmness">
+                                    <span>Firmness</span>
+                                </label>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="pore">
+                                    <span>Pores</span>
+                                </label>
+                            </div>
+
+                            <div class="concern_group">
+                                <h4>Skin Tone Condition</h4>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="redness">
+                                    <span>Redness</span>
+                                </label>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="age_spot">
+                                    <span>Age Spots</span>
+                                </label>
+                                <label class="checkbox_card">
+                                    <input type="checkbox" name="skin_concern" value="oiliness">
+                                    <span>Oiliness</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="analyze-skin-btn">Analyze Skin</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- ================= CENTER COLUMN ================= -->
+        <main class="dashboard_center">
+            
+            <!-- Display the skin analysis results buttons -->
+            <div class="concern_list" id="concern-buttons-list">
+                {% for result in skin_result %}
+                    <button class="concern_button"
+                        data-overlay="{{result.overlay_image_url}}"
+                        data-mask="{{result.mask_image_url}}"
+                        data-score="{{result.ui_score}}"
+                        data-type="{{result.type}}">
+                        {{ result.display_name }}
+                    </button>
+                {% endfor %}
+            </div>
+
+            <section class="viewer_section card" id="analysis-image-overlay">
+                {% if skin_result %}    
+                    <div class="image_pair">
+                        <div class="image_card">
+                            <h3>Original</h3>
+                            <img src="{{ resized_image_url }}" id="before_image" class="result_image">
+                        </div>
+                        <div class="image_card">
+                            <h3>Analysis Overlay</h3>
+                            <img src="{{ skin_result.0.overlay_image_url }}" id="overlay_image" class="result_image">
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="empty_result_state">
+                        <h3>No Analysis Results Yet</h3>
+                        <p>Upload an image and select skin concerns to see the analysis results.</p>
+                    </div>
+                {% endif %}
+            </section>
+        </main>
+
+        <!-- ================= RIGHT COLUMN ================= -->
+        <aside class="dashboard_right">
+            <div class="dashboard_right_sticky_group">
+                <div class="card analysis_info" id="skin-summary-card">
+                    <!-- Scan Summary-->
+                    <div class="summary_item">
+                        <h4>Skin Age</h4>
+                        <p class="summary_value">{{ skin_age }}</p>
+                    </div>
+                    <div class="summary_item">
+                        <h4>Overall Score</h4>
+                        <p class="summary_value">{{ overall_score }}</p>
+                    </div>
+                    <div class="summary_item">
+                        <h4>Whole Face</h4>
+                        <p class="summary_value">{{ skin_type.whole }}</p>
+                    </div>
+                    <div class="summary_item">
+                        <h4>T-Zone</h4>
+                        <p class="summary_value">{{ skin_type.t_zone }}</p>
+                    </div>
+                    <div class="summary_item">
+                        <h4>U-Zone</h4>
+                        <p class="summary_value">{{ skin_type.u_zone }}</p>
+                    </div>
+
+                    <hr>
+                    
+                    {% if skin_result %}
+                        <h2 id="selected_concern">{{ skin_result.0.display_name }}</h2>
+                        <p>UI Score: <span id="selected_score">{{ skin_result.0.ui_score }}</span></p>
+                    {% else %}
+                        <h2 id="selected_concern">Pending Scan</h2>
+                        <p>UI Score: <span id="selected_score">-</span></p>
+                    {% endif %}
+                </div>
+
+                <details class="card score_info_box">
+                    <summary>ⓘ How to read your scores</summary>
+                    <div class="score_info_content">
+                        <div class="score_info_item">
+                            <strong>Skin Concern Scores</strong>
+                            <p>
+                                Higher = Better ↑<br>
+                                100 → Best<br>
+                                Lower scores → More room for improvement
+                            </p>
+                        </div>
+                        <div class="score_info_item">
+                            <strong>Skin Age</strong>
+                            <p>
+                                Lower = Better ↓<br>
+                                A lower estimated skin age generally indicates younger-looking skin.
+                            </p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- ================= BOTTOM ROW: ANALYTICS GRAPHS ================= -->
+    <div class="dashboard_bottom_grid">
+
+        <!-- KPI Summary Row -->
+        <section class="analytics_section" id="analytics-progress-section">
+            <h2 class="section_subtitle">Analytics & Progress</h2>
+            <div class="analytics_actions_row">
+                <a
+                    href="{% url 'download_report' %}"
+                    class="btn btn-primary"
+                >
+                    Download PDF Report
+                </a>
+                <a
+                    href="{% url 'scan_history' %}"
+                    class="btn btn-outline"
+                >
+                    View Scan History
+                </a>
+            </div>
+            <div class="analytics_summary_grid">
+                <div class="card summary_kpi">
+                    <h4>Total Scans</h4>
+                    <p>{{ summary.total_scans }}</p>
+                </div>
+                <div class="card summary_kpi">
+                    <h4>Latest Score</h4>
+                    <p>{{ summary.latest_overall_score }}</p>
+                </div>
+                <div class="card summary_kpi">
+                    <h4>Skin Age</h4>
+                    <p>{{ summary.latest_skin_age }}</p>
+                </div>
+                <div class="card summary_kpi">
+                    <h4>Concerns Tracked</h4>
+                    <p>{{ summary.concerns_tracked }}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Two-Column Main Charts -->
+        <div class="two_col_grid">
+            <section class="card graph_card">
+                <h3>Overall Score</h3>
+                <div class="chart_container">
+                    <canvas id="overall-score-chart"></canvas>
+                </div>
+            </section>
+            
+            <section class="card graph_card">
+                <h3>Skin Age</h3>
+                <div class="chart_container">
+                    <canvas id="skin-age-chart"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <!-- Two-Column Text Insights & Trends -->
+        <div class="two_col_grid">
+            <section class="card insights_card" id="insights-section">
+                <h3>Insights</h3>
+                <div id="insights-container"></div>
+            </section>
+
+            <section class="card trends_card">
+                <h3>Latest Changes</h3>
+                <div id="trends-container"></div>
+            </section>
+        </div>
+
+        <!-- Full Width Concern Charts -->
+        <section class="card concerns_section">
+            <h3>Concern Progress</h3>
+            <div id="concern-charts"></div>
+        </section>
+
+    </div>
+
+</section>
+
+<!-- JSON Data Scripts for Chart.js -->
+{{ graphs|json_script:"graph-data" }}
+{{ summary|json_script:"summary-data" }}
+{{ insights|json_script:"insights-data" }}
+{{ trends|json_script:"trends-data" }}
+
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/tour.js' %}"></script>
+    <script src="{% static 'js/scan-loading.js' %}"></script>
+{% endblock %}

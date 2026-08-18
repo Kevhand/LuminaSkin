@@ -1,0 +1,129 @@
+{% extends "skin/base.html" %}
+{% load static %}
+
+{% block title %}
+    Scan History - LuminaSkin
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/scan_history.css' %}">
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/scan_history.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<section class="scan_history_layout">
+    <form style="display: none;">
+        {% csrf_token %}
+    </form>
+
+    <div class="page_header fade-in">
+        <span class="section-label">YOUR JOURNEY</span>
+        <h1 class="section_title">Scan History</h1>
+        <p class="section_subtitle">
+            Track your skin's progression, overall score, and changing concerns over time.
+        </p>
+    </div>
+
+    {% if scans %}
+
+        <div class="timeline_container fade-in delay-1">
+
+            {% for scan in scans %}
+
+                <div class="timeline_item">
+                    
+                    <!-- 1. The Date (Left Column) -->
+                    <div class="timeline_date desktop_only">
+                        <strong>{{ scan.date_created|date:"M j" }}</strong>
+                        <span>{{ scan.date_created|date:"Y" }}</span>
+                    </div>
+
+                    <!-- 2. The Timeline Node (Center Column) -->
+                    <div class="timeline_node_wrapper">
+                        <!-- The Score Circle -->
+                        <div class="timeline_node" title="Overall Score">
+                            {{ scan.overall_score|floatformat:0|default:"-" }}
+                        </div>
+                        <!-- The connecting vertical line -->
+                        <div class="timeline_line"></div>
+                    </div>
+
+                    <!-- 3. The Details (Right Column Card) -->
+                    <div class="timeline_card card mock-ui">
+                        
+                        <div class="mobile_date mobile_only">
+                            {{ scan.date_created|date:"M j, Y" }}
+                        </div>
+
+                        <!-- Top of card: Skin Age & Thumbnail -->
+                        <div class="timeline_card_header">
+                            <div class="skin_age_badge">
+                                <span>Skin Age</span>
+                                <strong>{{ scan.skin_age|default:"-" }}</strong>
+                            </div>
+                            
+                            {% if scan.original_image %}
+                                <img src="{{ scan.original_image.url }}" class="scan_thumb" alt="Thumbnail">
+                            {% endif %}
+                        </div>
+
+                        <!-- Middle of card: Mini Concern Breakdown -->
+                        <div class="concern_preview_list">
+                            <p class="preview_label">Tracked Concerns ↓</p>
+                            
+                            <!-- Django ORM: Grabbing the top 4 concerns for this scan -->
+                            {% for result in scan.results.all|slice:":4" %}
+                                <div class="concern_preview_row">
+                                    <span>{{ result.display_name }}</span>
+                                    <strong>{{ result.ui_score|floatformat:0 }}</strong>
+                                </div>
+                            {% empty %}
+                                <p class="empty_concerns">Scan data recorded. Click below for full breakdown.</p>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Bottom of card: Actions -->
+                        <div class="timeline_actions">
+                            <a href="{% url 'scan_detail' scan.scan_id %}" class="btn btn-primary btn-small">
+                                View Full Analysis
+                            </a>
+                            <button 
+                                type="button"
+                                class="btn-delete delete-scan-btn"
+                                data-delete-url="{% url 'delete_scan' scan.scan_id %}"
+                            >
+                                Delete
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <!-- Empty State -->
+        <div class="empty_state_wrapper fade-in delay-1">
+            <div class="empty_result_state">
+                <div class="empty_icon">📈</div>
+                <h3>No history yet</h3>
+                <p>Complete your first skin analysis to start tracking your progression journey.</p>
+                <a href="{% url 'dashboard' %}" class="btn btn-primary" style="margin-top: 15px;">
+                    Start Your First Scan
+                </a>
+            </div>
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

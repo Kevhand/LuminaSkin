@@ -1,0 +1,159 @@
+:root {
+    --primary: #4a7c73;         
+    --primary-hover: #3d665f;
+    --bg-color: #f8fafc;        
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --shadow-lg: 0 12px 30px rgba(74, 124, 115, 0.1);
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   2. AUTHENTICATION LAYOUT
+========================================= */
+.auth_layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh; 
+    padding: 40px 20px;
+}
+
+.auth_card {
+    width: 100%;
+    max-width: 420px; 
+    padding: 40px;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    text-align: center;
+}
+
+.auth_title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 8px 0;
+}
+
+.auth_subtitle {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin: 0 0 30px 0;
+}
+
+/* =========================================
+   3. FORM ELEMENTS
+========================================= */
+.auth_form {
+    text-align: left;
+}
+
+.form_group {
+    margin-bottom: 20px;
+}
+
+.form_group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+
+.auth_form input[type="text"],
+.auth_form input[type="email"],
+.auth_form input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    color: var(--text-main);
+    background-color: var(--bg-color);
+    transition: var(--transition);
+    box-sizing: border-box;
+}
+
+.auth_form input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(74, 124, 115, 0.15);
+    background-color: var(--card-bg);
+}
+
+.auth_btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 1.05rem;
+}
+
+/* Error message styling */
+.error_message {
+    background-color: #fff1f2;
+    color: #e11d48;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid #fecdd3;
+}
+
+/* =========================================
+   4. FOOTER LINKS
+========================================= */
+.auth_footer_text {
+    margin-top: 25px;
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.auth_footer_text a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.auth_footer_text a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+
+.field_error {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #d9534f;
+}
+
+.field_error p {
+    margin: 2px 0;
+}
+
+.error_message {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #d9534f;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   5. RESPONSIVE DESIGN
+========================================= */
+@media (max-width: 600px) {
+    .auth_card {
+        padding: 30px 20px;
+    }
+}

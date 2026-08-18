@@ -1,0 +1,259 @@
+{% extends 'skin/base.html' %}
+{% load static %}
+
+{% block title %}
+    Skin Profile - LuminaSkin
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/skin_profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="profile_layout">
+
+    {% if profile_exists %}
+
+        <!-- TOP HEADER: Progress Bar -->
+        <div class="profile_header card">
+            <div class="header_content">
+                <h1>My Skin Profile</h1>
+                <p>Complete your profile to unlock more personalized AI recommendations.</p>
+
+                <div class="progress_container">
+                    <div class="progress_bar">
+                        <div class="progress_fill" style="width: {{ total_completion }}%;"></div>
+                    </div>
+                    <span class="progress_text">{{ total_completion }}% Complete</span>
+                </div>
+            </div>
+
+            <a href="{% url 'edit_skin_profile' %}" class="btn btn-primary edit_btn">
+                ✨ Edit Profile
+            </a>
+        </div>
+
+        <!-- MIDDLE SECTION: 2-Column Grid for Details -->
+        <div class="profile_details_grid">
+            
+            <!-- Basic Info Card -->
+            <div class="profile_cards card">
+                <h2>
+                    Basic Information
+                    <span class="completion">{{ skin_profile_complete }}%</span>
+                </h2>
+
+                {% if skin_profile_exists %}
+                    <div class="info_row">
+                        <span class="info_label">Age:</span>
+                        <span class="info_value">{{ skin_profile.age }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Gender:</span>
+                        <span class="info_value">{{ skin_profile.gender }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Country:</span>
+                        <span class="info_value">{{ skin_profile.country }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Skin Goals:</span>
+                        <div class="tags">
+                            {% for goal in skin_profile.skin_goals %}
+                                <span class="tag">{{ goal }}</span>
+                            {% empty %}
+                                <span class="empty_text">None</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Budget:</span>
+                        <span class="info_value">{{ skin_profile.budget }}</span>
+                    </div>
+                    
+                    <div class="info_row">
+                        <span class="info_label">Allergies:</span>
+                        <div class="tags">
+                            {% for allergy in skin_profile.allergies %}
+                                <span class="tag error_tag">{{ allergy }}</span>
+                            {% empty %}
+                                <span class="empty_text">None</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="info_row">
+                        <span class="info_label">Pregnancy Status:</span>
+                        {% if skin_profile.pregnancy_status %}
+                            <span class="info_value">Yes</span>
+                        {% elif skin_profile.pregnancy_status == False %}
+                            <span class="info_value">No</span>
+                        {% else %}
+                            <span class="empty_text">Not specified</span>
+                        {% endif %}
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Vegan/Cruelty-Free:</span>
+                        <span class="info_value">{{ skin_profile.vegan_cruelty_free }}</span>
+                    </div>
+                {% else %}
+                    <p class="empty_text">No basic information available.</p>
+                {% endif %}
+            </div>
+
+            <!-- Lifestyle Card -->
+            <div class="profile_cards card">
+                <h2>
+                    Lifestyle
+                    <span class="completion">{{ lifestyle_complete }}%</span>
+                </h2>
+
+                {% if lifestyle_exists %}
+                    <div class="info_row">
+                        <span class="info_label">Sleep Hours:</span>
+                        <span class="info_value">{{ lifestyle.sleep_hours }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Water Intake:</span>
+                        <span class="info_value">{{ lifestyle.water_intake }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Stress Level:</span>
+                        <span class="info_value">{{ lifestyle.stress_level }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Smoking Status:</span>
+                        <span class="info_value">{{ lifestyle.smoking }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Alcohol Consumption:</span>
+                        <span class="info_value">{{ lifestyle.alcohol_consumption }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Exercise Frequency:</span>
+                        <span class="info_value">{{ lifestyle.exercise_frequency }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Exercise Hours/Week:</span>
+                        <span class="info_value">{{ lifestyle.exercise_hours_per_week }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">Sun Exposure:</span>
+                        <span class="info_value">{{ lifestyle.sun_exposure }}</span>
+                    </div>
+                    <div class="info_row">
+                        <span class="info_label">SPF Usage:</span>
+                        <span class="info_value">{{ lifestyle.spf_usage }}</span>
+                    </div>
+                {% else %}
+                    <p class="empty_text">No lifestyle information available.</p>
+                {% endif %}
+            </div>
+
+            <!-- Routine Card -->
+            <div class="profile_cards card full_width_card">
+                <h2>
+                    Daily Routine
+                    <span class="completion">{{ routine_complete }}%</span>
+                </h2>
+
+                {% if routine_exists %}
+                    <div class="info_row routine_row">
+                        <span class="info_label">☀️ Morning Routine:</span>
+                        <div class="tags">
+                            {% for morn_routine in current_routine.morning_routine %}
+                                <span class="tag">{{ morn_routine }}</span>
+                            {% empty %}
+                                <span class="empty_text">None</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="info_row routine_row">
+                        <span class="info_label">🌙 Night Routine:</span>
+                        <div class="tags">
+                            {% for night_routine in current_routine.night_routine %}
+                                <span class="tag night_tag">{{ night_routine }}</span>
+                            {% empty %}
+                                <span class="empty_text">None</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="empty_text">No routine information available.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- BOTTOM SECTION: Product Inventory -->
+        <div class="profile_cards card products_section">
+            <h2 class="section_subtitle">
+                My Products
+                <span class="completion">{{ products_complete }}%</span>
+            </h2>
+
+            {% if products_exist %}
+                <div class="products_grid">
+                    {% for product in products %}
+                        <div class="product_card">
+                            {% if product.is_current %}
+                                <div class="current_badge">⭐ Current Product</div>
+                            {% endif %}
+                            
+                            <div class="product_header">
+                                <h3>{{ product.brand }}</h3>
+                                <h4>{{ product.product_name }}</h4>
+                                <span class="product_type">{{ product.product_type }}</span>
+                            </div>
+
+                            <div class="product_details">
+                                <p><strong>Usage:</strong> {{ product.usage_frequency }}</p>
+                                <p><strong>Effectiveness:</strong> {{ product.effectiveness_rating }}</p>
+                            </div>
+
+                            <div class="product_tags_section">
+                                <p class="tags_label">Ingredients:</p>
+                                <div class="tags">
+                                    {% for ingredient in product.ingredients %}
+                                        <span class="tag">{{ ingredient }}</span>
+                                    {% empty %}
+                                        <span class="empty_text">None listed</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <div class="product_tags_section">
+                                <p class="tags_label">Side Effects:</p>
+                                <div class="tags">
+                                    {% for side_effect in product.side_effects %}
+                                        <span class="tag error_tag">{{ side_effect }}</span>
+                                    {% empty %}
+                                        <span class="empty_text">None reported</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty_text">No products information available.</p>
+            {% endif %}
+        </div>
+
+    {% else %}
+
+        <!-- Empty State -->
+        <div class="empty_profile card">
+            <h1>Welcome to LuminaSkin</h1>
+            <p>
+                You haven't completed your Skin Profile yet. 
+                Complete it to receive more personalized AI recommendations.
+            </p>
+            <a href="{% url 'edit_skin_profile' %}" class="btn btn-primary">
+                Complete Profile
+            </a>
+        </div>
+
+    {% endif %}
+
+</section>
+{% endblock %}

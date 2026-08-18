@@ -1,0 +1,122 @@
+{% extends "skin/base.html" %}
+{% load static %}
+
+{% block title %}
+    Scan Results - LuminaSkin
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/scan_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="scan_detail_layout">
+
+    <!-- ================= HEADER ================= -->
+    <div class="page_header fade-in">
+        <div>
+            <span class="section-label">SCAN REPORT</span>
+            <h1 class="section_title">Scan Results</h1>
+            <p class="section_subtitle">
+                {{ scan.date_created|date:"F j, Y · g:i A" }}
+            </p>
+        </div>
+        <a href="{% url 'scan_history' %}" class="btn-secondary back-btn">
+            ← Back to History
+        </a>
+    </div>
+
+    <!-- ================= OVERVIEW CARD ================= -->
+    <div class="overview_card mock-ui fade-in delay-1">
+        
+        <div class="overview_image_wrapper">
+            {% if scan.original_image %}
+                <img 
+                    src="{{ scan.original_image.url }}" 
+                    alt="Original skin scan" 
+                    class="original_image"
+                >
+            {% else %}
+                <div class="image_placeholder">📸 No Original Image</div>
+            {% endif %}
+            <span class="image_badge">Original Image</span>
+        </div>
+
+        <div class="overview_stats">
+            <h3 class="box_title">Clinical Summary</h3>
+            
+            <div class="primary_stats_grid">
+                <div class="stat_box highlight_box">
+                    <span class="stat_label">Overall Score</span>
+                    {% if scan.overall_score is not None %}
+                        <strong class="stat_value text-primary">{{ scan.overall_score|floatformat:1 }}</strong>
+                    {% else %}
+                        <strong class="stat_value text-light">—</strong>
+                    {% endif %}
+                </div>
+
+                <div class="stat_box">
+                    <span class="stat_label">Skin Age</span>
+                    {% if scan.skin_age is not None %}
+                        <strong class="stat_value text-primary">{{ scan.skin_age }}</strong>
+                    {% else %}
+                        <strong class="stat_value text-light">—</strong>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if scan.skin_type %}
+                <div class="skin_type_section">
+                    <span class="stat_label">Regional Skin Types</span>
+                    <div class="skin_type_grid">
+                        {% for region, skin_type in scan.skin_type.items %}
+                            <div class="skin_type_item">
+                                <strong>{{ region|title }}</strong>
+                                <span>{{ skin_type }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- ================= CONCERNS ANALYSIS ================= -->
+    <div class="concerns_section fade-in delay-2">
+        <h2 class="section_title" style="font-size: 1.8rem; margin-bottom: 25px;">Detailed Analysis</h2>
+
+        <div class="concerns_grid">
+            {% for result in results %}
+                <article class="concern_detail_card">
+                    
+                    <div class="concern_image_wrapper">
+                        {% if result.overlay_image %}
+                            <img 
+                                src="{{ result.overlay_image.url }}" 
+                                alt="{{ result.display_name }} analysis"
+                                class="overlay_image"
+                            >
+                        {% else %}
+                            <div class="image_placeholder">No AI Overlay</div>
+                        {% endif %}
+
+                        {% if result.ui_score is not None %}
+                            <div class="concern_score_badge">
+                                <span class="score_label">Severity</span>
+                                <span class="score_number">{{ result.ui_score|floatformat:0 }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="concern_info">
+                        <h3>{{ result.display_name }}</h3>
+                    </div>
+
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+{% endblock %}

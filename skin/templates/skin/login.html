@@ -1,0 +1,79 @@
+{% extends "skin/base.html" %}
+{% load static %}
+
+{% block title %}
+    Login - LuminaSkin
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="auth_layout">
+    <div class="card auth_card">
+
+        <h1 class="auth_title">Welcome Back</h1>
+        <p class="auth_subtitle">
+            Log in to continue your skincare journey.
+        </p>
+
+        <form method="post" class="auth_form">
+            {% csrf_token %}
+
+            <div class="form_group">
+                <label for="{{ form.username.id_for_label }}">
+                    Username
+                </label>
+
+                {{ form.username }}
+
+                {% if form.username.errors %}
+                    <div class="field_error">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form_group">
+                <label for="{{ form.password.id_for_label }}">
+                    Password
+                </label>
+
+                {{ form.password }}
+
+                {% if form.password.errors %}
+                    <div class="field_error">
+                        {% for error in form.password.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            {% if form.non_field_errors %}
+                <div class="error_message">
+                    {% for error in form.non_field_errors %}
+                        <p>Incorrect username or password. Please try again.</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+
+            <button type="submit" class="btn btn-primary auth_btn">
+                Login
+            </button>
+        </form>
+
+        <p class="auth_footer_text">
+            Don't have an account?
+            <a href="{% url 'signup' %}">Sign up here</a>
+        </p>
+
+    </div>
+</section>
+{% endblock %}

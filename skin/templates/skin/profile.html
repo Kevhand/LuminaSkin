@@ -1,0 +1,89 @@
+{% extends "skin/base.html" %}
+{% load static %}
+
+{% block title %}
+    Profile - LuminaSkin
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tour.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="profile_layout" id="profile-layout" data-user-id="{{ request.user.id }}">
+    <h1 class="section_title" style="grid-column: 1 / -1; text-align: left;">Account Settings</h1>
+
+    <!-- Left Sidebar: Profile Summary Card -->
+    <aside class="card profile_summary_card">
+        <div class="avatar_wrapper">
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile_avatar">
+            {% else %}
+                <div class="profile_avatar_placeholder">
+                    <span>{{ profile.user.username|make_list|first|upper }}</span>
+                </div>
+            {% endif %}
+        </div>
+
+        <h2 class="profile_name">@{{ profile.user.username }}</h2>
+        <p class="profile_email">{{ profile.user.email }}</p>
+
+        <div class="profile_meta">
+            <div class="meta_item">
+                <span class="meta_label">Mobile</span>
+                <span class="meta_value">{{ profile.mobile_number|default:"Not set" }}</span>
+            </div>
+            
+            <!-- Added Date of Birth Display -->
+            <div class="meta_item">
+                <span class="meta_label">Birth Date</span>
+                <span class="meta_value">{{ profile.date_of_birth|default:"Not set" }}</span>
+            </div>
+        </div>
+
+        <a href="{% url 'skin_profile' %}" class="btn btn-secondary full_width_btn" id="skin-profile-link">
+            ✨ Manage Skin Profile
+        </a>
+    </aside>
+
+    <!-- Right Area: Edit Details Form -->
+    <main class="card profile_edit_card" id="profile-edit-card">
+        <h2 class="card_title">Update Details</h2>
+        <p class="card_subtitle">Keep your personal information up to date.</p>
+
+        <form method="POST" enctype="multipart/form-data" class="profile_form">
+            {% csrf_token %}
+            
+            <div class="form_group">
+                <label>Profile Picture</label>
+                <div class="file_upload_wrapper">
+                    {{ form.profile_picture }}
+                </div>
+            </div>
+
+            <!-- Grouping shorter inputs into two columns -->
+            <div class="form_two_col">
+                <div class="form_group">
+                    <label>Mobile Number</label>
+                    {{ form.mobile_number }}
+                </div>
+                
+                <div class="form_group">
+                    <label>Date of Birth</label>
+                    {{ form.date_of_birth }}
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary submit_btn">Save Changes</button>
+        </form>
+    </main>
+
+</section>
+{% endblock %}
+
+<!-- Hook up the new JavaScript file -->
+{% block js %}
+    <script src="{% static 'js/profile.js' %}"></script>
+    <script src="{% static 'js/tour.js' %}"></script>
+{% endblock %}

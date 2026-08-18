@@ -1,0 +1,317 @@
+/* =========================================
+   1. GLOBAL VARIABLES (Sage Green Theme)
+========================================= */
+:root {
+    --primary: #4a7c73;         /* Calming Sage Green */
+    --primary-hover: #3d665f;
+    --primary-light: #f0f7f5;   
+    --secondary: #8fb1aa;       
+    --accent: #e6f2ef;
+    
+    --error: #e11d48;           /* Modern Soft Red for Errors */
+    --error-light: #fff1f2;
+    
+    --bg-color: #f8fafc;        
+    --card-bg: #ffffff;
+    
+    --text-main: #1e293b;
+    --text-light: #64748b;
+    
+    --border: #e2e8f0;
+    
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+    --shadow-md: 0 8px 20px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 30px rgba(74, 124, 115, 0.12); 
+    
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   2. RESET & BASE
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* =========================================
+   3. NAVBAR
+========================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* =========================================
+   4. LAYOUT CONTAINERS
+========================================= */
+.container {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+    padding: 40px 0;
+    flex-grow: 1; 
+}
+
+/* =========================================
+   5. CARDS
+========================================= */
+.card,
+.result_card,
+.upload_card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 35px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* =========================================
+   6. TYPOGRAPHY
+========================================= */
+.section_title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--text-main);
+}
+
+/* =========================================
+   7. BUTTONS
+========================================= */
+button,
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+button:hover,
+.btn:hover,
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background: var(--primary-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+/* =========================================
+   8. FORMS & INPUTS
+========================================= */
+.form_group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    transition: var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(74, 124, 115, 0.15); 
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+/* =========================================
+   9. STATIC ALERTS (e.g., inside forms)
+========================================= */
+.alert_banner {
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.alert_banner.success {
+    background: var(--primary-light);
+    color: var(--primary-hover);
+    border: 1px solid rgba(74, 124, 115, 0.3);
+}
+
+.alert_banner.error {
+    background: var(--error-light);
+    color: var(--error);
+    border: 1px solid rgba(225, 29, 72, 0.3);
+}
+
+/* =========================================
+   10. TOAST NOTIFICATIONS (Floating)
+========================================= */
+#toast-container {
+    position: fixed;
+    top: 90px; /* Sits cleanly below the sticky navbar */
+    right: 25px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    width: 320px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-left: 5px solid var(--primary);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-lg);
+    transform: translateX(120%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast.error {
+    border-left-color: var(--error);
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast h4 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.toast p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* =========================================
+   11. FOOTER
+========================================= */
+footer {
+    text-align: center;
+    color: var(--text-light);
+    padding: 30px 20px;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 0.95rem;
+}

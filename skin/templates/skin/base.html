@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            LuminaSkin
+        {% endblock %}
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            {% if user.is_authenticated %}
+                <a href="{% url 'home' %}">LuminaSkin</a>
+            {% else %}
+                <a href="{% url 'home' %}">LuminaSkin</a>
+            {% endif %}
+        </div>
+
+        <ul class="nav-links">
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'profile' %}" id="nav-profile-link">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'chat' %}" id="nav-chat-link">Chat</a></li>
+            {% else %}
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'home' %}">home</a></li>
+            {% endif %}
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+{% block main %}
+<main class="container">
+    {% block content %}
+    {% endblock %}
+</main>
+{% endblock %}
+
+{% block footer %}
+<footer>
+    <p>© 2026 LuminaSkin • AI Powered Skin Analysis</p>
+</footer>
+{% endblock %}
+
+<!-- Global Toast Notification Container -->
+<div id="toast-container"></div>
+
+<script src="{% static 'js/base.js' %}"></script>
+
+{% block js %}
+{% endblock %}
+
+<!-- Dynamic Django Messages Script -->
+{% if messages %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    {% for message in messages %}
+        // Dynamically set title based on the Django message tag
+        let title = "Notification";
+        let type = "{{ message.tags }}"; // e.g., 'success', 'error', 'warning'
+        
+        if (type.includes('success')) title = "Success";
+        if (type.includes('error')) title = "Error";
+        
+        // Pass the dynamic title, the actual message, and the type for styling
+        if (typeof showToast === "function") {
+            showToast(title, "{{ message }}", type);
+        }
+    {% endfor %}
+});
+</script>
+{% endif %}
+
+</body>
+</html>

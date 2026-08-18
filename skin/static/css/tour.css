@@ -1,0 +1,189 @@
+/* =========================================
+   POST-SCAN SPOTLIGHT TOUR (standalone module)
+   Does not modify any existing dashboard.css rules.
+========================================= */
+
+/* "Your results are ready" transition banner */
+.tour_ready_banner {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: #ffffff;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 12px 30px rgba(44, 75, 69, 0.15);
+    border-radius: 30px;
+    padding: 14px 24px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+
+.tour_ready_banner.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Dimming backdrop with a spotlight cutout over the target element */
+.tour_backdrop {
+    position: fixed;
+    z-index: 9998;
+    border-radius: 12px;
+    pointer-events: none; /* lets clicks pass through to the highlighted UI underneath */
+    box-shadow: 0 0 0 9999px rgba(15, 23, 42, 0.55);
+    transition: top 0.35s ease, left 0.35s ease, width 0.35s ease, height 0.35s ease;
+}
+
+/* Tooltip card */
+.tour_tooltip {
+    position: fixed;
+    z-index: 9999;
+    max-width: 300px;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(44, 75, 69, 0.18);
+    padding: 18px 20px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: top 0.35s ease, left 0.35s ease;
+}
+
+.tour_tooltip h4 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    color: #1e293b;
+}
+
+.tour_tooltip p {
+    margin: 0 0 14px 0;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: #475569;
+    white-space: pre-line;
+}
+
+.tour_tooltip_footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.tour_dots {
+    display: flex;
+    gap: 6px;
+}
+
+.tour_dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e2e8f0;
+}
+
+.tour_dot.active {
+    background: #4a7c73;
+}
+
+.tour_tooltip_actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tour_skip_link {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 0.82rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.tour_skip_link:hover {
+    color: #1e293b;
+}
+
+.tour_next_btn {
+    background: #4a7c73;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.tour_next_btn:hover {
+    background: #3d665f;
+}
+
+/* Replay button in the dashboard header */
+.tour_replay_btn {
+    margin-left: 12px;
+    background: #f0f7f5;
+    color: #4a7c73;
+    border: 1px solid rgba(74, 124, 115, 0.25);
+    border-radius: 30px;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.tour_replay_btn:hover {
+    background: #e6f2ef;
+}
+
+@media (max-width: 600px) {
+    .tour_tooltip {
+        max-width: 85vw;
+    }
+}
+
+/* Welcome modal — shown once, only to brand-new users with zero scans */
+.tour_welcome_overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    background: rgba(15, 23, 42, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tour_welcome_card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(44, 75, 69, 0.2);
+    padding: 32px;
+    max-width: 380px;
+    width: 90%;
+    text-align: center;
+}
+
+.tour_welcome_card h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.3rem;
+    color: #1e293b;
+}
+
+.tour_welcome_card p {
+    margin: 0 0 24px 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #475569;
+}
+
+.tour_welcome_actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}

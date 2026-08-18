@@ -1,0 +1,272 @@
+{% extends 'skin/base.html' %}
+{% load static %}
+
+{% block title %}
+    Edit Skin Profile - LuminaSkin
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/edit_skin_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tour.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="edit_profile_layout" id="edit-skin-profile-layout" data-user-id="{{ request.user.id }}">
+    
+    <!-- Header -->
+    <div class="profile_header card">
+        <div class="header_content">
+            <h1>Edit Skin Profile</h1>
+            <p>
+                Complete the sections below to improve your AI recommendations.
+                <strong>Overall completion: {{ total_completion }}%</strong>
+            </p>
+        </div>
+
+        <a href="{% url 'skin_profile' %}" class="btn btn-secondary edit_btn">
+            ← Back to Profile
+        </a>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab_navigation">
+        <button class="tab_button active" data-tab="basic_info">
+            Basic Information
+        </button>
+        <button class="tab_button" data-tab="lifestyle">
+            Lifestyle
+        </button>
+        <button class="tab_button" data-tab="routine">
+            Routine
+        </button>
+        <button class="tab_button" data-tab="products">
+            Products
+        </button>
+    </div>
+
+    <!-- TAB 1: Basic Info -->
+    <div class="tab_content active" id="basic_info">
+        <div class="profile_cards card">
+            <h2>Basic Information
+                <span class="completion">{{ skin_profile_complete }}%</span>
+            </h2>
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="age">Age</label>
+                        {{ skin_profile_form.age }}
+                    </div>
+                    <div class="form_group">
+                        <label for="gender">Gender</label>
+                        {{ skin_profile_form.gender }}
+                    </div>
+                </div>
+
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="country">Country</label>
+                        {{ skin_profile_form.country }}
+                    </div>
+                    <div class="form_group">
+                        <label for="budget">Budget</label>
+                        {{ skin_profile_form.budget }}
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <label for="skin_goals">Skin Goals</label>
+                    {{ skin_profile_form.skin_goals }}
+                </div>
+
+                <div class="form_group">
+                    <label for="allergies">Allergies</label>
+                    {{ skin_profile_form.allergies }}
+                </div>
+
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="pregnancy_status">Pregnancy Status</label>
+                        {{ skin_profile_form.pregnancy_status }}
+                    </div>
+                    <div class="form_group">
+                        <label for="vegan_cruelty_free">Vegan/Cruelty-Free Preference</label>
+                        {{ skin_profile_form.vegan_cruelty_free }}
+                    </div>
+                </div>
+
+                <div class="form_footer">
+                    <p class="form_hint">The more information you provide, the more personalized your AI recommendations become.</p>
+                    <button name="save_basic" type="submit" class="btn btn-primary">Save Basic Info</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TAB 2: Lifestyle -->
+    <div class="tab_content" id="lifestyle">
+        <div class="profile_cards card">
+            <h2>Lifestyle
+                <span class="completion">{{ lifestyle_complete }}%</span>
+            </h2>
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="sleep_hours">Sleep Hours</label>
+                        {{ lifestyle_form.sleep_hours }}
+                    </div>
+                    <div class="form_group">
+                        <label for="water_intake">Water Intake (liters)</label>
+                        {{ lifestyle_form.water_intake }}
+                    </div>
+                </div>
+
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="stress_level">Stress Level</label>
+                        {{ lifestyle_form.stress_level }}
+                    </div>
+                    <div class="form_group">
+                        <label for="smoking">Smoking Status</label>
+                        {{ lifestyle_form.smoking }}
+                    </div>
+                </div>
+
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="alcohol_consumption">Alcohol Consumption</label>
+                        {{ lifestyle_form.alcohol_consumption }}
+                    </div>
+                    <div class="form_group">
+                        <label for="exercise_frequency">Exercise Frequency</label>
+                        {{ lifestyle_form.exercise_frequency }}
+                    </div>
+                </div>
+
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="exercise_hours_per_week">Exercise Hours per Week</label>
+                        {{ lifestyle_form.exercise_hours_per_week }}
+                    </div>
+                    <div class="form_group">
+                        <label for="sun_exposure">Sun Exposure</label>
+                        {{ lifestyle_form.sun_exposure }}
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <label for="spf_usage">SPF Usage</label>
+                    {{ lifestyle_form.spf_usage }}
+                </div>
+
+                <div class="form_footer">
+                    <p class="form_hint">These habits drastically affect skin health and AI tracking accuracy.</p>
+                    <button name="save_lifestyle" type="submit" class="btn btn-primary">Save Lifestyle Info</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TAB 3: Routine -->
+    <div class="tab_content" id="routine">
+        <div class="profile_cards card">
+            <h2>Daily Routine
+                <span class="completion">{{ routine_complete }}%</span>
+            </h2>
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form_group">
+                    <label for="morning_routine">☀️ Morning Routine</label>
+                    {{ current_routine_form.morning_routine }}
+                </div>
+                
+                <div class="form_group">
+                    <label for="night_routine">🌙 Night Routine</label>
+                    {{ current_routine_form.night_routine }}
+                </div>
+                
+                <div class="form_footer">
+                    <p class="form_hint">List the steps and product types you use daily.</p>
+                    <button name="save_routine" type="submit" class="btn btn-primary">Save Routine Info</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TAB 4: Products -->
+    <div class="tab_content" id="products">
+        <div class="profile_cards card">
+            <h2>Add Product
+                <span class="completion">{{ products_complete }}%</span>
+            </h2>
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="brand">Brand</label>
+                        {{ product_form.brand }}
+                    </div>
+                    <div class="form_group">
+                        <label for="product_name">Product Name</label>
+                        {{ product_form.product_name }}
+                    </div>
+                </div>
+
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="product_type">Product Type</label>
+                        {{ product_form.product_type }}
+                    </div>
+                    <div class="form_group">
+                        <label for="usage_frequency">Usage Frequency</label>
+                        {{ product_form.usage_frequency }}
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <label for="ingredients">Key Ingredients</label>
+                    {{ product_form.ingredients }}
+                </div>
+
+                <div class="form_two_col">
+                    <div class="form_group">
+                        <label for="effectiveness_rating">Effectiveness Rating</label>
+                        {{ product_form.effectiveness_rating }}
+                    </div>
+                    <div class="form_group">
+                        <label for="side_effects">Side Effects (if any)</label>
+                        {{ product_form.side_effects }}
+                    </div>
+                </div>
+
+                <div class="form_group checkbox_group">
+                    <label class="checkbox_label">
+                        {{ product_form.is_current }}
+                        <span>This is a current product in my routine</span>
+                    </label>
+                </div>
+
+                <div class="form_footer">
+                    <p class="form_hint">Track what works and what causes breakouts.</p>
+                    <button name="save_product" type="submit" class="btn btn-primary">Save Product Info</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/edit_skin_profile.js' %}"></script>
+    <script src="{% static 'js/tour.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,347 @@
+{% extends 'skin/base.html' %}
+{% load static %}
+
+{% block title %}
+    Welcome to LuminaSkin
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="home-page">
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+    <section class="hero-section">
+        <div class="hero-content fade-in delay-1">
+            <span class="hero-badge">
+                ✨ AI-Powered Skin Intelligence
+            </span>
+
+            <h1>
+                Understand your skin.
+                <span class="text-highlight">Improve it intelligently.</span>
+            </h1>
+
+            <p class="hero-description">
+                LuminaSkin combines AI skin analysis, personalized recommendations, your lifestyle, skincare routine, and product information to help you understand and improve your skin over time.
+            </p>
+
+            <div class="hero-actions">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}" class="btn btn-primary">Analyze Your Skin</a>
+                {% else %}
+                    <a href="{% url 'signup' %}" class="btn btn-primary">Get Started Free</a>
+                    <a href="{% url 'login' %}" class="btn btn-secondary">Sign In</a>
+                {% endif %}
+            </div>
+
+            <div class="hero-trust">
+                <span>✓ AI-powered analysis</span>
+                <span>✓ Personalized insights</span>
+                <span>✓ Track your progress</span>
+            </div>
+        </div>
+
+        <!-- HERO VISUAL (Mock UI) -->
+        <div class="hero-visual fade-in delay-2">
+            <div class="analysis-card mock-ui">
+                <div class="analysis-header">
+                    <div>
+                        <span class="small-label">SKIN ANALYSIS</span>
+                        <h3>Your Skin Overview</h3>
+                    </div>
+                    <span class="analysis-status">AI</span>
+                </div>
+
+                <div class="score-section">
+                    <div class="score-circle">
+                        <strong>71</strong>
+                        <span>/100</span>
+                    </div>
+                    <div class="score-info">
+                        <span class="small-label">OVERALL SKIN SCORE</span>
+                        <p>Your skin is doing well, with a few areas worth focusing on.</p>
+                    </div>
+                </div>
+
+                <div class="concern-list">
+                    <div class="concern-row">
+                        <span>Eye Bags</span><strong>58</strong>
+                    </div>
+                    <div class="concern-row">
+                        <span>Wrinkles</span><strong>71</strong>
+                    </div>
+                    <div class="concern-row">
+                        <span>Dark Circles</span><strong>72</strong>
+                    </div>
+                    <div class="concern-row">
+                        <span>Firmness</span><strong>84</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         HOW IT WORKS
+    ====================================================== -->
+    <section class="how-section fade-in delay-3">
+        <div class="section-heading">
+            <span class="section-label">HOW IT WORKS</span>
+            <h2>From a skin scan to a <span class="text-highlight">personalized plan.</span></h2>
+            <p>LuminaSkin brings together your skin analysis and personal information to create a more complete picture of your skin.</p>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <span class="step-number">01</span>
+                <div class="step-icon">👤</div>
+                <h3>Build Your Profile</h3>
+                <p>Tell LuminaSkin about your skin goals, preferences, allergies, and other personal factors.</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">02</span>
+                <div class="step-icon">📸</div>
+                <h3>Scan Your Skin</h3>
+                <p>Upload a facial image and let our AI analyze visible skin concerns.</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">03</span>
+                <div class="step-icon">🔍</div>
+                <h3>Understand Your Results</h3>
+                <p>Explore individual concern scores, overall skin health, and visual analysis.</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">04</span>
+                <div class="step-icon">✨</div>
+                <h3>Get Personalized Insights</h3>
+                <p>Receive recommendations based on your scan, profile, lifestyle, routine, and products.</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">05</span>
+                <div class="step-icon">📈</div>
+                <h3>Track Your Progress</h3>
+                <p>Revisit your results and monitor how your skin changes over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         AI ANALYSIS FEATURE
+    ====================================================== -->
+    <section class="feature-section analysis-feature fade-in delay-2">
+        <div class="feature-visual">
+            <div class="visual-card mock-ui">
+                <span class="small-label">AI SKIN ANALYSIS</span>
+                <div class="visual-score">
+                    <strong>71.4</strong>
+                    <span>Overall Score</span>
+                </div>
+                <div class="visual-bars">
+                    <div class="bar-group">
+                        <div class="bar-labels"><span>Firmness</span><strong>84</strong></div>
+                        <div class="bar"><i style="width:84%"></i></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-labels"><span>Dark Circles</span><strong>72</strong></div>
+                        <div class="bar"><i style="width:72%"></i></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-labels"><span>Wrinkles</span><strong>71</strong></div>
+                        <div class="bar"><i style="width:71%"></i></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-labels"><span>Eye Bags</span><strong>58</strong></div>
+                        <div class="bar"><i style="width:58%"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-content">
+            <span class="section-label">UNDERSTAND YOUR SKIN</span>
+            <h2>See more than <span class="text-highlight">a single score.</span></h2>
+            <p>LuminaSkin analyzes multiple visible skin concerns instead of reducing your skin health to one number.</p>
+            
+            <ul class="feature-list">
+                <li>
+                    <strong>Multiple skin concerns</strong>
+                    <span>Analyze acne, wrinkles, dark circles, eye bags, redness, oiliness and more.</span>
+                </li>
+                <li>
+                    <strong>Severity scores</strong>
+                    <span>Understand which areas need the most attention.</span>
+                </li>
+                <li>
+                    <strong>Visual analysis</strong>
+                    <span>Explore visual overlays showing detected regions.</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         PERSONALIZATION FEATURE
+    ====================================================== -->
+    <section class="feature-section reverse fade-in delay-2">
+        <div class="feature-content">
+            <span class="section-label">PERSONALIZED TO YOU</span>
+            <h2>Your skin is more than <span class="text-highlight">what a camera sees.</span></h2>
+            <p>A skin scan is only one part of the picture. LuminaSkin combines your results with information about your lifestyle, routine, products, and goals.</p>
+
+            <div class="personalization-grid">
+                <div class="mini-card">
+                    <span class="icon">👤</span>
+                    <strong>Profile</strong>
+                    <p>Goals, preferences, allergies and more.</p>
+                </div>
+                <div class="mini-card">
+                    <span class="icon">🌿</span>
+                    <strong>Lifestyle</strong>
+                    <p>Sleep, stress, exercise, SPF and habits.</p>
+                </div>
+                <div class="mini-card">
+                    <span class="icon">🧴</span>
+                    <strong>Products</strong>
+                    <p>Track the products you currently use.</p>
+                </div>
+                <div class="mini-card">
+                    <span class="icon">✨</span>
+                    <strong>Routine</strong>
+                    <p>Keep your morning and night routine organized.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-visual">
+            <div class="profile-preview mock-ui">
+                <div class="profile-preview-header">
+                    <span>YOUR SKIN PROFILE</span>
+                    <strong>78%</strong>
+                </div>
+                <div class="profile-progress"><span style="width:78%"></span></div>
+                
+                <div class="profile-items">
+                    <div class="profile-item-row">
+                        <span class="icon">🎯</span>
+                        <div><p>Skin Goals</p><strong>3 goals</strong></div>
+                    </div>
+                    <div class="profile-item-row">
+                        <span class="icon">🌙</span>
+                        <div><p>Sleep</p><strong>7.2 hrs</strong></div>
+                    </div>
+                    <div class="profile-item-row">
+                        <span class="icon">🧴</span>
+                        <div><p>Products</p><strong>5 tracked</strong></div>
+                    </div>
+                    <div class="profile-item-row">
+                        <span class="icon">✨</span>
+                        <div><p>Routine</p><strong>Morning + Night</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         AI COMPANION
+    ====================================================== -->
+    <section class="feature-section ai-section fade-in delay-2">
+        <div class="feature-content">
+            <span class="section-label">YOUR AI SKIN COMPANION</span>
+            <h2>Just talk to <span class="text-highlight">LuminaSkin.</span></h2>
+            <p>Ask questions, understand your results, get recommendations, or update your skincare information naturally through conversation.</p>
+        </div>
+
+        <div class="feature-visual">
+            <div class="chat-preview mock-ui">
+                <div class="chat-message user-message">
+                    I've started using SPF every morning.
+                </div>
+                <div class="chat-message ai-message">
+                    <strong>LuminaSkin AI</strong>
+                    <p>Got it. I'll update your lifestyle information to reflect your daily SPF use.</p>
+                    <span class="chat-confirm">✓ Ready to update</span>
+                </div>
+                <div class="chat-message user-message">
+                    Yes, update it.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         CONCERNS
+    ====================================================== -->
+    <section class="concerns-section fade-in delay-3">
+        <div class="section-heading">
+            <span class="section-label">AI ANALYSIS</span>
+            <h2>Skin concerns we can analyze</h2>
+            <p>LuminaSkin currently analyzes a range of visible skin characteristics.</p>
+        </div>
+
+        <div class="concerns-grid">
+            <span class="pill">Acne</span>
+            <span class="pill">Wrinkles</span>
+            <span class="pill">Dark Circles</span>
+            <span class="pill">Droopy Lower Eyelid</span>
+            <span class="pill">Droopy Upper Eyelid</span>
+            <span class="pill">Firmness</span>
+            <span class="pill">Age Spots</span>
+            <span class="pill">Eye Bags</span>
+            <span class="pill">Redness</span>
+            <span class="pill">Oiliness</span>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         PRIVACY / TRUST
+    ====================================================== -->
+    <section class="trust-section fade-in delay-2">
+        <div class="trust-content">
+            <span class="section-label">BUILT AROUND YOUR DATA</span>
+            <h2>Your information helps make your insights <span class="text-highlight">personal.</span></h2>
+            <p>Your profile, lifestyle, routine, products, and analysis results work together to provide more relevant insights instead of generic skincare advice.</p>
+        </div>
+
+        <div class="trust-points">
+            <div class="point">
+                <strong>01</strong>
+                <span>Personalized recommendations</span>
+            </div>
+            <div class="point">
+                <strong>02</strong>
+                <span>Track your skin over time</span>
+            </div>
+            <div class="point">
+                <strong>03</strong>
+                <span>Keep your skincare information organized</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         FINAL CTA
+    ====================================================== -->
+    <section class="final-cta fade-in delay-3">
+        <span class="section-label">START YOUR SKIN JOURNEY</span>
+        <h2>Ready to understand your skin better?</h2>
+        <p>Create your profile, analyze your skin, and start building a more personalized skincare journey with LuminaSkin.</p>
+        
+        <div class="cta-actions">
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="btn btn-primary">Analyze Your Skin</a>
+            {% else %}
+                <a href="{% url 'signup' %}" class="btn btn-primary">Get Started Free</a>
+            {% endif %}
+        </div>
+    </section>
+
+</main>
+
+{% endblock %}

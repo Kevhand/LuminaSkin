@@ -1,0 +1,310 @@
+{% extends 'skin/base.html' %}
+{% load static %}
+
+{% block title %}
+    About LuminaSkin
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="about-page">
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+    <section class="about-hero fade-in">
+        <div class="about-hero-content">
+            <span class="section-label">ABOUT LUMINASKIN</span>
+            <h1>
+                Skincare should be
+                <span class="text-highlight">personal.</span>
+            </h1>
+            <p>
+                LuminaSkin is an AI-powered skincare platform designed to help you understand your skin, make sense of your skincare habits, and build a more personalized skincare journey.
+            </p>
+        </div>
+
+        <div class="about-hero-card mock-ui">
+            <div class="about-card-header">
+                <span class="small-label">LUMINASKIN</span>
+                <span class="analysis-status">AI</span>
+            </div>
+            <div class="about-card-content">
+                <div class="about-card-icon">✨</div>
+                <h3>Understand. Personalize. Improve.</h3>
+                <p>Your skin analysis is only the beginning.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         WHY LUMINASKIN
+    ====================================================== -->
+    <section class="about-section fade-in delay-1">
+        <div class="section-heading">
+            <span class="section-label">WHY LUMINASKIN</span>
+            <h2>
+                Your skin is more than
+                <span class="text-highlight">what a camera sees.</span>
+            </h2>
+            <p>
+                A facial image can reveal visible skin concerns, but it cannot explain everything that influences your skincare journey.
+            </p>
+        </div>
+
+        <div class="problem-grid">
+            <div class="about-card">
+                <span class="about-card-number">01</span>
+                <div class="about-icon">📸</div>
+                <h3>Skin is complex</h3>
+                <p>Different concerns can appear together, and a single overall score cannot tell you where your skin needs attention.</p>
+            </div>
+            <div class="about-card">
+                <span class="about-card-number">02</span>
+                <div class="about-icon">💬</div>
+                <h3>Advice is often generic</h3>
+                <p>Skincare recommendations become more useful when they take your goals, habits, products, and preferences into account.</p>
+            </div>
+            <div class="about-card">
+                <span class="about-card-number">03</span>
+                <div class="about-icon">📈</div>
+                <h3>Progress matters</h3>
+                <p>Understanding your skin is not a one-time process. Your routine and skin can change over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         OUR APPROACH
+    ====================================================== -->
+    <section class="about-section approach-section fade-in delay-2">
+        <div class="approach-content">
+            <span class="section-label">OUR APPROACH</span>
+            <h2>
+                Bringing different pieces
+                <span class="text-highlight">together.</span>
+            </h2>
+            <p>
+                LuminaSkin combines information from different parts of your skincare journey instead of relying on a single source of information.
+            </p>
+        </div>
+
+        <div class="approach-grid">
+            <div class="approach-card">
+                <span class="approach-icon">🔍</span>
+                <h3>Skin Analysis</h3>
+                <p>Analyze visible skin characteristics and identify areas that may require attention.</p>
+            </div>
+            <div class="approach-card">
+                <span class="approach-icon">👤</span>
+                <h3>Personal Profile</h3>
+                <p>Keep track of your skin goals, preferences, allergies, and other personal information.</p>
+            </div>
+            <div class="approach-card">
+                <span class="approach-icon">🌿</span>
+                <h3>Lifestyle</h3>
+                <p>Include factors such as sleep, stress, exercise, sun exposure, and SPF habits.</p>
+            </div>
+            <div class="approach-card">
+                <span class="approach-icon">🧴</span>
+                <h3>Routine & Products</h3>
+                <p>Keep your skincare routine and the products you use organized in one place.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         SYSTEM FLOW
+    ====================================================== -->
+    <section class="about-section system-section fade-in delay-2">
+        <div class="section-heading">
+            <span class="section-label">HOW IT CONNECTS</span>
+            <h2>
+                From information to
+                <span class="text-highlight">personalized insight.</span>
+            </h2>
+            <p>
+                Each part of LuminaSkin contributes context that can help make its AI responses more relevant to your skincare journey.
+            </p>
+        </div>
+
+        <div class="system-flow">
+            <div class="flow-card">
+                <span class="flow-number">01</span>
+                <span class="flow-icon">📸</span>
+                <strong>Skin Scan</strong>
+                <p>Visible skin analysis</p>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-card">
+                <span class="flow-number">02</span>
+                <span class="flow-icon">👤</span>
+                <strong>Your Context</strong>
+                <p>Profile, lifestyle & preferences</p>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-card">
+                <span class="flow-number">03</span>
+                <span class="flow-icon">🧴</span>
+                <strong>Your Skincare</strong>
+                <p>Routine & products</p>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-card highlight-flow">
+                <span class="flow-number">04</span>
+                <span class="flow-icon">✨</span>
+                <strong>AI Insights</strong>
+                <p>Personalized recommendations</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         AI COMPANION
+    ====================================================== -->
+    <section class="about-section ai-about-section fade-in delay-2">
+        <div class="ai-about-visual">
+            <div class="chat-window mock-ui">
+                <div class="chat-window-header">
+                    <div>
+                        <span class="small-label">LUMINASKIN AI</span>
+                        <strong>Your Skin Companion</strong>
+                    </div>
+                    <span class="analysis-status online-status">● Online</span>
+                </div>
+                <div class="about-chat">
+                    <div class="chat-message user-message">
+                        I've started using SPF every morning.
+                    </div>
+                    <div class="chat-message ai-message">
+                        <strong>LuminaSkin AI</strong>
+                        <p>Got it. I can update your lifestyle information to reflect your daily SPF use.</p>
+                        <span class="chat-confirm">✓ Ready to update</span>
+                    </div>
+                    <div class="chat-message user-message">
+                        Also update my routine.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-content">
+            <span class="section-label">YOUR AI COMPANION</span>
+            <h2>
+                You don't need to
+                <span class="text-highlight">navigate everything alone.</span>
+            </h2>
+            <p>
+                LuminaSkin's AI assistant lets you interact with your skincare information naturally.
+            </p>
+            <ul class="feature-list">
+                <li>
+                    <strong>Ask questions</strong>
+                    <span>Get explanations and insights based on the information available in your profile.</span>
+                </li>
+                <li>
+                    <strong>Update naturally</strong>
+                    <span>Tell LuminaSkin when your routine, products, lifestyle, or profile changes.</span>
+                </li>
+                <li>
+                    <strong>Review before changing</strong>
+                    <span>Updates can be presented for confirmation before your stored information is changed.</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         PERSONALIZATION
+    ====================================================== -->
+    <section class="about-section personalization-about fade-in delay-2">
+        <div class="section-heading">
+            <span class="section-label">PERSONALIZATION</span>
+            <h2>
+                Built around
+                <span class="text-highlight">your journey.</span>
+            </h2>
+            <p>
+                LuminaSkin is designed to keep your skincare information connected instead of scattered across different places.
+            </p>
+        </div>
+
+        <div class="journey-grid">
+            <div class="journey-item">
+                <span>🎯</span>
+                <strong>Your Goals</strong>
+                <p>What you want to improve.</p>
+            </div>
+            <div class="journey-item">
+                <span>🌿</span>
+                <strong>Your Lifestyle</strong>
+                <p>Habits that form part of your daily life.</p>
+            </div>
+            <div class="journey-item">
+                <span>✨</span>
+                <strong>Your Routine</strong>
+                <p>What you do in the morning and at night.</p>
+            </div>
+            <div class="journey-item">
+                <span>🧴</span>
+                <strong>Your Products</strong>
+                <p>What you're currently using.</p>
+            </div>
+            <div class="journey-item">
+                <span>📊</span>
+                <strong>Your Results</strong>
+                <p>What your skin analysis shows.</p>
+            </div>
+            <div class="journey-item">
+                <span>📈</span>
+                <strong>Your Progress</strong>
+                <p>How your skin changes over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         AI DISCLAIMER
+    ====================================================== -->
+    <section class="about-section disclaimer-section fade-in delay-2">
+        <div class="disclaimer-icon">ℹ</div>
+        <div class="disclaimer-text">
+            <span class="section-label">AN IMPORTANT NOTE</span>
+            <h2>
+                AI-powered,
+                <span class="text-highlight">not a replacement for a dermatologist.</span>
+            </h2>
+            <p>
+                LuminaSkin is designed to provide informational insights and help you organize your skincare journey. Its analysis and recommendations should not be considered a medical diagnosis or a substitute for professional medical advice.
+            </p>
+            <p>
+                If you have persistent, severe, or worsening skin concerns, consult a qualified dermatologist or other appropriate healthcare professional.
+            </p>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         FINAL CTA
+    ====================================================== -->
+    <section class="final-cta fade-in delay-3">
+        <span class="section-label">START YOUR SKIN JOURNEY</span>
+        <h2>Understand your skin. Build your journey.</h2>
+        <p>
+            Start with a skin analysis and let LuminaSkin help you connect the pieces.
+        </p>
+        <div class="cta-actions">
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="btn btn-primary">Go to Dashboard</a>
+            {% else %}
+                <a href="{% url 'signup' %}" class="btn btn-primary">Get Started Free</a>
+            {% endif %}
+        </div>
+    </section>
+
+</main>
+
+{% endblock %}

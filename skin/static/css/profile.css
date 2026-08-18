@@ -1,0 +1,175 @@
+/* =========================================
+   1. MAIN LAYOUT
+========================================= */
+.profile_layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+    align-items: start;
+}
+
+/* =========================================
+   2. PROFILE SUMMARY CARD (Left Sidebar)
+========================================= */
+.profile_summary_card {
+    text-align: center;
+    padding: 40px 24px;
+    position: sticky;
+    top: 90px;
+}
+
+.avatar_wrapper {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.profile_avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-light);
+    box-shadow: var(--shadow-md);
+}
+
+/* Fallback for when no image is uploaded */
+.profile_avatar_placeholder {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: 700;
+    border: 4px solid white;
+    box-shadow: var(--shadow-md);
+}
+
+.profile_name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 4px;
+}
+
+.profile_email {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+/* Small data box inside the left card */
+.profile_meta {
+    text-align: left;
+    background: var(--bg-color);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border);
+}
+
+.meta_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.meta_label {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.meta_value {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* Custom styling for the Skin Profile link */
+.full_width_btn {
+    width: 100%;
+    display: flex;
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid rgba(74, 124, 115, 0.2);
+    box-shadow: none;
+}
+
+.full_width_btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* =========================================
+   3. EDIT DETAILS FORM (Right Area)
+========================================= */
+.profile_edit_card {
+    padding: 40px;
+}
+
+.card_title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 6px;
+}
+
+.card_subtitle {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin: 0 0 30px;
+}
+
+/* Split smaller inputs into two columns */
+.form_two_col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Make the file input blend in perfectly */
+.file_upload_wrapper input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg-color);
+    color: var(--text-main);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.file_upload_wrapper input[type="file"]:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.submit_btn {
+    margin-top: 15px;
+    width: auto;
+    padding: 14px 32px;
+}
+
+/* =========================================
+   4. RESPONSIVE DESIGN
+========================================= */
+@media (max-width: 900px) {
+    .profile_layout {
+        grid-template-columns: 1fr; /* Stack the layout */
+    }
+    
+    .profile_summary_card {
+        position: static;
+    }
+    
+    .form_two_col {
+        grid-template-columns: 1fr; /* Stack the smaller inputs */
+    }
+}
