@@ -2,6 +2,30 @@
 
 ### An AI-powered skincare platform that combines skin analysis, personalized recommendations, and intelligent conversational guidance.
 
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)
+![Django](https://img.shields.io/badge/Django-5.1.4-green?logo=django)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [How It Works](#how-it-works)
+- [AI Architecture](#ai-architecture)
+- [Skin Analysis & Progress Tracking](#skin-analysis--progress-tracking)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Setup & Installation](#setup--installation)
+- [Challenges](#challenges)
+- [Limitations](#limitations)
+- [Future Improvements](#future-improvements)
+- [Why I Built LuminaSkin](#why-i-built-luminaskin)
+- [License](#license)
+- [Author](#author)
+
+---
 
 ## Overview
 
@@ -9,203 +33,90 @@ LuminaSkin is an AI-powered personalized skincare platform designed to help user
 
 Instead of treating the AI assistant as a standalone chatbot, LuminaSkin builds a structured understanding of each user through their skin profile, lifestyle, skincare routine, products, goals, allergies, budget, and skin analysis results.
 
-This information is actively used by the AI to personalize its responses. The more relevant information available about the user, the better the assistant can understand their situation and provide targeted guidance for their specific skin concerns.
+This information is actively used as context for the AI, allowing it to provide guidance based on the user's actual situation rather than generic skincare advice.
 
-Users can also update their information directly through conversation. For example, instead of navigating to their profile and manually changing their lifestyle information, a user can simply tell the assistant:
+Users can also update their information directly through conversation. For example:
 
 > "I stopped smoking."
 
-The AI can interpret the message and update the corresponding structured user information, allowing that change to influence future recommendations and conversations.
+The AI can interpret this as a structured lifestyle update, allowing the change to influence future recommendations and conversations.
 
-LuminaSkin combines this evolving user context with skin analysis, conversation history, and current external information when necessary to provide personalized, actionable skincare guidance.
+The result is a continuous system in which skin analysis, personal context, conversation history, and current external information can work together to provide personalized and actionable skincare guidance.
 
-
+---
 
 ## Key Features
 
-### 🧠 An AI That Understands the User
+### 🧠 Context-Aware AI Assistant
 
-LuminaSkin uses information provided by the user — including their skin profile, lifestyle, skincare routine, products, goals, allergies, budget, and skin analysis results — as meaningful context for its AI assistant.
-
-This allows the assistant to give guidance based on the user's actual situation rather than generic skincare advice.
-
-For example, if a user is already using a salicylic acid treatment, the assistant can take that into account when suggesting changes instead of simply recommending another exfoliant.
+LuminaSkin uses relevant user information — including skin analysis, lifestyle, routine, products, goals, allergies, budget, and previous conversations — to personalize AI responses.
 
 ### 💬 Conversational Profile & Routine Updates
 
-Users don't always need to navigate through profile or routine pages to keep their information up to date.
+Users can update structured information directly through the AI assistant instead of always navigating through profile or routine pages.
 
-They can update their structured information directly through the AI assistant.
-
-For example:
-
-> "I stopped smoking."
-
-or:
-
-> "I started using a new moisturizer."
-
-The assistant can interpret these conversational updates and reflect them in the user's structured lifestyle, routine, or product information.
-
-These updates then become part of the context used in future conversations and recommendations.
+These conversational updates can become part of the user's future AI context.
 
 ### 🔬 Skin Analysis
-
-LuminaSkin provides AI-assisted skin analysis with:
 
 - Multiple skin concern detection
 - Individual concern scores
 - Overall skin score
 - Skin age estimation
-- Visual overlays showing where detected concerns occur
+- Visual mask and overlay results
 - Historical scan tracking
 
 ### 📈 Progress & Insights
 
-Users can track how their skin changes over time through:
-
-- Overall score trends
-- Individual concern trends
+- Overall and per-concern trends
 - Skin age changes
-- Historical scan data
+- Historical scan results
 - Visual analytics and graphs
 - Downloadable PDF reports
 
-### 🎯 Personalized Skincare Guidance
+### 🌐 Current Information
 
-The assistant combines relevant user information with skin analysis results to provide guidance tailored to the user's current situation.
+The final AI reasoning stage can use Google Search when a question requires current, recent, or externally verifiable information.
 
-Recommendations can take into account:
+### 🛡️ Safety-Aware Guidance
 
-- Existing skincare routine
-- Products already being used
-- Lifestyle factors
-- Skin concerns
-- Allergies
-- Budget
-- Previous skin analysis results
+The AI is instructed not to diagnose medical conditions or prescribe medication, to distinguish observations from certainty, and to recommend professional dermatological advice for severe or persistent concerns.
 
-### 🌐 Current Information When Needed
-
-For questions requiring up-to-date or externally verifiable information, the AI can use Google Search to retrieve current information instead of relying solely on its existing knowledge.
-
-Search is used selectively rather than for information that is already available in the user's LuminaSkin context.
-
-### 🛡️ Responsible AI Guidance
-
-LuminaSkin includes safeguards designed for skincare-related conversations:
-
-- Does not diagnose medical conditions
-- Does not prescribe medication
-- Distinguishes observations from certainty
-- Recommends professional dermatological advice for severe or persistent concerns
-- Does not invent user-specific scan results or products
-- Checks relevant user constraints such as allergies and budget before making recommendations
-
-
-
+---
 
 ## How It Works
 
-LuminaSkin is built around a continuous feedback loop between the user's skin data, everyday information, and the AI assistant.
+LuminaSkin is designed as a user journey that connects skin analysis, personal context, AI guidance, and long-term progress.
 
-### 1. Build Your Skin Profile
+### 1. Build Your Profile
 
-Users provide information such as their skincare goals, lifestyle, routine, products, allergies, and budget.
-
-This information becomes structured user context that can be used by the AI when providing personalized guidance.
+Users provide information such as their skincare goals, lifestyle, routine, products, allergies, budget, and other relevant personal context.
 
 ### 2. Start a Skin Analysis
 
-Users upload a clear image of their face and select the skin concerns they want to analyze.
+Users upload a clear facial image and select the skin concerns they want to analyze.
 
-The image quality and selected concerns determine the analysis performed on the uploaded image.
+### 3. Review Results
 
-### 3. Receive Skin Analysis Results
+The completed analysis provides overall and individual concern scores, skin age, and visual overlays showing detected areas.
 
-Once the analysis is complete, LuminaSkin provides:
+### 4. Track Progress
 
-- Overall skin score
-- Skin age
-- Individual scores for selected skin concerns
-- Visual overlays showing where detected concerns occur
-- Detailed scan results
+Completed scans are stored in scan history so users can compare results and view trends over time.
 
-Users can view their results and understand which areas of their skin need the most attention.
+### 5. Ask the AI
 
-### 4. Track Skin Progress
+Users can ask skincare questions naturally. The assistant uses the context relevant to the question rather than treating every conversation as a generic skincare query.
 
-Every completed scan is stored in the user's scan history.
+### 6. Keep Information Updated
 
-Users can compare their results over time through:
+Users can update their profile, routine, lifestyle, and products either through dedicated forms or conversationally through the AI assistant.
 
-- Overall score trends
-- Individual concern trends
-- Skin age changes
-- Historical scan results
-- Graphs and visual analytics
+### 7. Generate Reports
 
-Users can also generate and download a PDF report containing their skin analysis and relevant insights.
+Users can generate downloadable PDF reports containing their analysis and progress information.
 
-### 5. Build an AI Understanding of the User
-
-LuminaSkin combines information from different parts of the user's profile, including:
-
-- Skin analysis
-- Skin profile
-- Lifestyle
-- Skincare routine
-- Products
-- Previous conversations
-
-This information is used as meaningful context for the AI rather than simply being stored as profile data.
-
-### 6. Ask the AI
-
-Users can ask questions naturally through the LuminaSkin AI assistant.
-
-For example:
-
-> "Why are my dark circles getting worse?"
-
-The assistant can use the user's relevant scan results, lifestyle information, routine, products, and recent conversation history to provide a personalized response.
-
-### 7. Update Your Information Through Conversation
-
-Users don't always need to navigate back to their profile or routine pages to update their information.
-
-They can simply tell the AI about a change.
-
-For example:
-
-> "I've started using sunscreen every morning."
-
-or:
-
-> "I stopped smoking."
-
-The assistant can interpret these updates and modify the relevant structured information, allowing the change to influence future recommendations and conversations.
-
-### 8. Get Personalized Guidance
-
-The assistant uses the relevant user context to provide actionable guidance for the user's specific situation.
-
-When a question requires current or externally verifiable information, LuminaSkin can use Google Search to retrieve up-to-date information.
-
-This creates a continuous loop:
-
-User Information  
-↓  
-Skin Analysis  
-↓  
-AI Understanding  
-↓  
-Personalized Guidance  
-↓  
-Profile & Routine Updates  
-↓  
-Better Future Guidance
-
+---
 
 ## AI Architecture
 
@@ -233,15 +144,12 @@ Context Assembly
 AI Reasoner
      │
      ├── Gemini
-     │
      ├── Model fallback
-     │
      └── Google Search when current information is required
      │
      ▼
 Personalized Response
 ```
-
 
 ### Module Planner
 The planner analyzes the user's message and determines which parts of the user's information may be relevant.
