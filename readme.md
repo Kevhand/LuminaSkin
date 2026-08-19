@@ -588,10 +588,10 @@ The following environment variables are required:
 ## Challenges
 Developing LuminaSkin involved several engineering challenges beyond connecting APIs and building the interface.
 
-- *Selective AI Context:* Designing the planner and context-selection stages so the final model receives information relevant to the current question instead of the user's entire stored profile.
-- *Consistent First-Scan States:* Handling users with no scan history consistently across the dashboard, analytics, insights, AI context, and report generation.
-- *Conversational-to-Structured Updates:* Converting natural language updates into structured application data that can be reused by future AI interactions.
-- *Longitudinal Analytics:* Building stable trend logic around user-facing UI scores so that tiny underlying fluctuations are not presented as meaningful changes.
+- **Selective AI Context:** Designing the planner and context-selection stages so the final model receives information relevant to the current question instead of the user's entire stored profile.
+- **Consistent First-Scan States:** Handling users with no scan history consistently across the dashboard, analytics, insights, AI context, and report generation.
+- **Conversational-to-Structured Updates:** Converting natural language updates into structured application data that can be reused by future AI interactions.
+- **Longitudinal Analytics:** Building stable trend logic around user-facing UI scores so that tiny underlying fluctuations are not presented as meaningful changes.
 
 These challenges influenced the architecture of the final system and helped shape LuminaSkin into a connected application rather than a collection of independent features.
 
@@ -615,14 +615,14 @@ These challenges influenced the architecture of the final system and helped shap
 - Further improve the conversational experience with richer interactions and more detailed AI-generated insights.
 
 ## Why I Built LuminaSkin
-*I built LuminaSkin around a simple idea:* skincare guidance becomes more useful when an assistant understands the person behind the skin scan.
+**I built LuminaSkin around a simple idea:** skincare guidance becomes more useful when an assistant understands the person behind the skin scan.
 
 Instead of treating a skin analysis as a one-time score, the project connects skin results with everyday information such as lifestyle, routine, products, goals, and preferences.
 
 The goal is to create a system that can use the information a user provides to guide them more personally and become more useful as that information evolves.
 
 ## License
-This project is licensed under the *MIT License*.
+This project is licensed under the **MIT License**.
 
 
 
