@@ -585,15 +585,24 @@ The following environment variables are required:
 
 
 
-## Limitations
+## Challenges
+Developing LuminaSkin involved several engineering challenges beyond connecting APIs and building the interface.
 
+- *Selective AI Context:* Designing the planner and context-selection stages so the final model receives information relevant to the current question instead of the user's entire stored profile.
+- *Consistent First-Scan States:* Handling users with no scan history consistently across the dashboard, analytics, insights, AI context, and report generation.
+- *Conversational-to-Structured Updates:* Converting natural language updates into structured application data that can be reused by future AI interactions.
+- *Longitudinal Analytics:* Building stable trend logic around user-facing UI scores so that tiny underlying fluctuations are not presented as meaningful changes.
+
+These challenges influenced the architecture of the final system and helped shape LuminaSkin into a connected application rather than a collection of independent features.
+
+
+## Limitations
 - Skin analysis results are intended for skincare guidance and are not a medical diagnosis.
 - AI-generated recommendations may not always be suitable for every individual and should not replace professional dermatological advice.
 - Skin analysis quality depends on the quality and clarity of the uploaded image.
 - The AI's recommendations depend on the accuracy and completeness of the information provided by the user.
 - Current information and product-related recommendations may depend on the availability and reliability of external search results.
 - The application currently relies on external services such as the YouCam Skin Analysis API and Google Gemini API.
-
 
 ## Future Improvements
 
@@ -603,7 +612,17 @@ The following environment variables are required:
 - Expand the range of skin concerns supported by the analysis system.
 - Further improve the AI's ability to combine skin analysis, lifestyle, routine, and product information.
 - Add more robust validation and handling for uploaded images and external API failures.
-- Improve the conversational experience with richer interactions and more detailed AI-generated insights.
+- Further improve the conversational experience with richer interactions and more detailed AI-generated insights.
+
+## Why I Built LuminaSkin
+*I built LuminaSkin around a simple idea:* skincare guidance becomes more useful when an assistant understands the person behind the skin scan.
+
+Instead of treating a skin analysis as a one-time score, the project connects skin results with everyday information such as lifestyle, routine, products, goals, and preferences.
+
+The goal is to create a system that can use the information a user provides to guide them more personally and become more useful as that information evolves.
+
+## License
+This project is licensed under the *MIT License*.
 
 
 
